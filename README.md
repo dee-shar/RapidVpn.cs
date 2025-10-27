@@ -3,7 +3,6 @@ Mobile-API for [Rapid VPN](https://play.google.com/store/apps/details?id=com.rap
 
 ## Example
 ```cs
-using System;
 using RapidVpnApi;
 
 namespace Application
