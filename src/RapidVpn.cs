@@ -50,8 +50,6 @@ namespace RapidVpnApi
             {
                 byte[] keyBytes = Encoding.UTF8.GetBytes(key);
                 byte[] decryptedBytes = Convert.FromBase64String(encryptedBase64Token);
-
-                // Custom XOR Decryption Loop (CRITICAL LOGIC)
                 foreach (byte keyByte in keyBytes)
                 {
                     for (int i = 0; i < decryptedBytes.Length; i++)
@@ -79,9 +77,7 @@ namespace RapidVpnApi
             var data = new StringContent(GenerateData(), Encoding.UTF8, "text/plain");
             var response = await httpClient.PostAsync($"{apiUrl}/register", data);
             var content = await response.Content.ReadAsStringAsync();
-
             using var document = JsonDocument.Parse(content);
-
             if (document.RootElement.TryGetProperty("data", out var dataElement) && dataElement.TryGetProperty("token", out var tokenElement))
             {
                 string encodedToken = tokenElement.GetString();
